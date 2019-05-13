@@ -1,25 +1,41 @@
-const webpack = require("webpack");
-const path = require("path");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const BrowserSyncPlugin = require('browser-sync-webpack-plugin')
+const webpack = require('webpack');
+const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-
-let config = (env, options) => {
+const config = (env, options) => {
     const MODE = options.mode;
     return {
-        entry: "./src/js/main.js",
+        entry: './src/js/main.js',
         output: {
-            path: path.resolve(__dirname) + '/dest',
-            filename: "main.js",
+            path: `${path.resolve(__dirname)}/dest`,
+            filename: 'main.js',
         },
         devtool: MODE === 'development' ? 'source-map' : '',
+        devServer: {
+            host: process.env.HOST || '0.0.0.0',
+            port: process.env.PORT || 8080,
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+            },
+            proxy: {
+                '/gif-api': {
+                    target: 'http://api.giphy.com/v1/gifs',
+                    pathRewrite: { '^/gif-api': '' },
+                    changeOrigin: true,
+                    secure: false,
+                },
+            },
+        },
         module: {
-            rules: [{
+            rules: [
+                {
                     test: /\.js$/,
                     exclude: /node_modules/,
-                    loader: "babel-loader"
-                }, {
+                    loader: 'babel-loader',
+                },
+                {
                     test: /\.(css|sass|scss)$/,
                     use: [
                         MiniCssExtractPlugin.loader,
@@ -33,42 +49,47 @@ let config = (env, options) => {
                         {
                             loader: 'postcss-loader',
                             options: {
-                                plugins: (loader) => [
+                                plugins: loader => [
                                     require('autoprefixer')({
-                                        browsers: ['last 2 versions']
-                                    })
-                                ]
-                            }
+                                        browsers: ['last 2 versions'],
+                                    }),
+                                ],
+                            },
                         },
                         {
                             loader: 'sass-loader',
                             options: {
                                 // sourceMap: true
-                            }
-                        }
-                    ]
+                            },
+                        },
+                    ],
                 },
                 {
                     test: /\.(png|jpg|gif|svg|woff|woff2)$/,
-                    use: [{
-                        loader: 'file-loader'
-                    }]
-                }
+                    use: [
+                        {
+                            loader: 'file-loader',
+                        },
+                    ],
+                },
             ],
         },
         node: {
-            fs: "empty" // avoids error messages
+            fs: 'empty', // avoids error messages
         },
         plugins: [
-            new CopyWebpackPlugin([{
-                from: 'src/*.html',
-                flatten: true
-            }, {
-                from: 'src/img/',
-                to: 'img/'
-            }]),
+            new CopyWebpackPlugin([
+                {
+                    from: 'src/*.html',
+                    flatten: true,
+                },
+                {
+                    from: 'src/img/',
+                    to: 'img/',
+                },
+            ]),
             new MiniCssExtractPlugin({
-                filename: "main.css",
+                filename: 'main.css',
             }),
             new BrowserSyncPlugin(
                 // BrowserSync options
@@ -80,15 +101,15 @@ let config = (env, options) => {
                     // (which should be serving on http://localhost:3100/)
                     // through BrowserSync
                     proxy: 'http://localhost:8080/',
-                    files: [{
-                        match: [
-                            '**/*.html'
-                        ]
-                    }]
+                    files: [
+                        {
+                            match: ['**/*.html'],
+                        },
+                    ],
                 }
-            )
-        ]
-    }
-}
+            ),
+        ],
+    };
+};
 
 module.exports = config;
