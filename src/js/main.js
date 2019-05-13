@@ -1,28 +1,41 @@
 import '../scss/main.scss';
-
-
-import { TweenLite, TimelineLite } from 'gsap';
-
-
-import win from './Window.js';
-import io from './io.js';
-import scroll from './Scroll.js';
-import fallback from './fallback.js';
-import $ from 'jquery-slim';
-
-const html = $('html');
-const body = $('body');
+import loadGif from './loadGif';
 
 const loadHandler = () => {
-    scroll.init();
-    win.noTransitionElts = $('.element-without-transition-on-resize');
-    win.init();
-    io.init();
-    fallback(body, html);
+  loadGif();
 }
 
 if (document.readyState === 'complete') {
    loadHandler();
 } else {
-   $(window).on('load', loadHandler);
+  document.addEventListener('readystatechange', ()=> {
+    if (document.readyState === 'complete') {
+      loadHandler();
+    }
+  })
 }
+
+
+
+
+// jQuery request
+
+// $.ajax({url: "http://api.giphy.com/v1/gifs/random?q=amazing&api_key=q7TSsbKeyuScTAoDpnpdJUbGIhpIeO4o&limit=5"}).done(function(){console.log('done');});
+// $.ajax({
+//     url: "http://api.giphy.com/v1/gifs/random?q=amazing&api_key=q7TSsbKeyuScTAoDpnpdJUbGIhpIeO4o&limit=5",
+//     success: function(result) {
+//         console.log('success', data);
+//       var data = result.data;
+//       console.log("DATA", data);
+//       var output = "";
+//       var gifURL = data.images.original.url
+//       output += "<img src='"+gifURL+"'/>";
+      
+//       $("#mono").html(output);
+//     },
+//     error: function(error) {
+//       console.log(error);
+//     }
+//   });
+  
+  

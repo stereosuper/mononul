@@ -2,7 +2,10 @@
   "name": "mononul",
   "version": "0.0.0",
   "main": "index.js",
-  "dependencies": {},
+  "dependencies": {
+    "@babel/polyfill": "^7.4.4",
+    "whatwg-fetch": "^3.0.0"
+  },
   "devDependencies": {
     "@babel/core": "^7.4.4",
     "@babel/preset-env": "^7.4.4",

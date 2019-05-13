@@ -11,6 +11,7 @@ body {
     font-family: "Gotham A", "Gotham B";
     font-style: normal;
     font-weight: 800;
+    overflow: hidden;
     
 }
 
@@ -58,6 +59,8 @@ article {
     // border: 1px solid lightcoral;
     height: 100%;
     width: 100%;
+    top: 0;
+    left: 0;
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -79,11 +82,13 @@ article {
         color: white;
         z-index: 2;
     }
+
     img {
         position: absolute;
-        bottom: 400px;
+        top: 20%;
+        right: 0;
         z-index: 1;
-        width: 70%;
+        
     }
 }
 .stereo {
@@ -101,6 +106,8 @@ article {
     img {
         position: absolute;
         top: 20%;
+        right: 0;
+        
         width: 70%;
     }
 }
@@ -133,6 +140,8 @@ article {
     // border: 1px solid lightcoral;
     height: 100%;
     width: 100%;
+    top: 0;
+    left: 0;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -225,8 +234,8 @@ article {
     .mono {
  
         img {
-            bottom: 0px;
-            width: 50%;
+            top: 50%;
+            height: 50%;
             right: 5%;
         }
     
@@ -254,8 +263,8 @@ article {
         }
 
         img {
-            width: 50%;
-            top: 51%;
+            height: 50%;
+            top: 50%;
             left: 10%;
             
         } 
