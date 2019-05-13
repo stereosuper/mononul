@@ -49,8 +49,10 @@ const loadGifHandler = () => {
         let srcset = '';
         const { length } = gifSizes;
         gifSizes.forEach((size, index) => {
-            srcset += `${imageData[size].url} ${imageData[size].width}w`;
-            if (index < length - 1) srcset += ',';
+            if (imageData[size].url) {
+                srcset += `${imageData[size].url} ${imageData[size].width}w`;
+                if (index < length - 1) srcset += ',';
+            }
         });
         return srcset;
     };
