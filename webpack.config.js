@@ -6,6 +6,9 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const config = (env, options) => {
     const MODE = options.mode;
+    const isDev = MODE !== 'production';
+    const LAMBDA_FUNCTIONS_PORT = 9000;
+    const GIF_API = isDev ? '' : `${process.env.URL}/.netlify/functions/getAPI`;
     return {
         entry: './src/js/main.js',
         output: {
@@ -20,9 +23,9 @@ const config = (env, options) => {
                 'Access-Control-Allow-Origin': '*',
             },
             proxy: {
-                '/gif-api': {
-                    target: 'http://api.giphy.com/v1/gifs',
-                    pathRewrite: { '^/gif-api': '' },
+                '/.netlify': {
+                    target: `http://localhost:${LAMBDA_FUNCTIONS_PORT}`,
+                    pathRewrite: { '^/.netlify/functions': '' },
                     changeOrigin: true,
                     secure: false,
                 },

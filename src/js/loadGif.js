@@ -1,6 +1,8 @@
 import '@babel/polyfill';
 import 'whatwg-fetch';
 
+
+
 const loadGifHandler = () => {
     const monoElement = document.getElementById('mono');
     const stereoElement = document.getElementById('stereo');
@@ -35,7 +37,12 @@ const loadGifHandler = () => {
     ];
 
     const getImageData = url =>
-        fetch(url)
+        fetch('/.netlify/functions/getAPI', {
+            method:'POST',
+            body: JSON.stringify({
+                uri: url
+            })
+        })
             .then(response => response.json())
             .then(response => {
                 let urlValue = '';
@@ -86,7 +93,7 @@ const loadGifHandler = () => {
     const makeImage = () => {
         tagsData.forEach(async tagData => {
             const { tag, element } = tagData;
-            const API_URL = `/gif-api/random?q=${tag}&api_key=q7TSsbKeyuScTAoDpnpdJUbGIhpIeO4o&limit=1`;
+            const API_URL = `random?q=${tag}&api_key=q7TSsbKeyuScTAoDpnpdJUbGIhpIeO4o&limit=1`;
             const imageData = await getImageData(API_URL);
             createImage({ imageData, element });
         });
