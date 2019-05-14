@@ -6,9 +6,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const config = (env, options) => {
     const MODE = options.mode;
-    const isDev = MODE !== 'production';
     const LAMBDA_FUNCTIONS_PORT = 9000;
-    const GIF_API = isDev ? '' : `${process.env.URL}/.netlify/functions/getAPI`;
     return {
         entry: './src/js/main.js',
         output: {
