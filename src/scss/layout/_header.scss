@@ -13,7 +13,7 @@ header {
     }
     
     
-    @media (max-width: $phone), (max-width: $phone-small) {
+    @media (max-width: $tablet), (max-width: $phone), (max-width: $phone-small) {
         
         
         h1 {
@@ -21,7 +21,7 @@ header {
         margin-top: 160%;
         font-size: 100px;
         height: 100%;
-        animation: touch 1.5s;
+        animation: touch 1s;
         opacity: 0;
         
 
