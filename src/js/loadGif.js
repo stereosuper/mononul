@@ -19,19 +19,19 @@ const loadGifHandler = () => {
 
     const tagsData = [
         {
-            tag: 'boring',
+            tag: 'mono',
             element: monoElement,
         },
         {
-            tag: 'boom',
+            tag: 'stereo',
             element: stereoElement,
         },
         {
-            tag: 'fail',
+            tag: 'nul',
             element: nulElement,
         },
         {
-            tag: 'amazing',
+            tag: 'super',
             element: superElement,
         },
     ];
