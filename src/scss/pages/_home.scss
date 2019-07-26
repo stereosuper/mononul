@@ -234,7 +234,7 @@ article {
 }
 
 
-@media (max-width: $tablet) {
+@media (max-width: 780px) {
     article {
         flex-direction: column;
         .first-part-container, .second-part-container {

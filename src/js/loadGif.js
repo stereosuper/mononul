@@ -19,7 +19,7 @@ const loadGifHandler = () => {
 
     const tagsData = [
         {
-            tag: 'mono',
+            tag: 'boring',
             element: monoElement,
         },
         {
@@ -27,7 +27,7 @@ const loadGifHandler = () => {
             element: stereoElement,
         },
         {
-            tag: 'nul',
+            tag: 'fail',
             element: nulElement,
         },
         {
