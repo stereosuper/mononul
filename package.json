@@ -17,7 +17,7 @@
     "copy-webpack-plugin": "^5.0.3",
     "css-loader": "^2.1.1",
     "file-loader": "^3.0.1",
-    "gsap": "^2.1.2",
+    "gsap": "^3.6.0",
     "intersection-observer": "^0.6.0",
     "jquery-slim": "^3.0.0",
     "mini-css-extract-plugin": "^0.6.0",
